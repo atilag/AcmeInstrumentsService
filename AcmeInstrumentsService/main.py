@@ -1,6 +1,7 @@
 from typing import Optional
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
 
 from AcmeInstrumentsService.program.program_id import ProgramId
 from AcmeInstrumentsService.program.load.load_program import load_program
@@ -8,6 +9,14 @@ from AcmeInstrumentsService.program.load.LoadProgramResponse import LoadProgramR
 from AcmeInstrumentsService.program.load.LoadProgramRequest import LoadProgramRequest
 from AcmeInstrumentsService.program.run.run_program import run_program
 from AcmeInstrumentsService.program.run.RunProgramResponse import RunProgramResponse
+from AcmeInstrumentsService.program.errors import (
+    InvalidPulseSequenceError,
+    ValueNotAnIntegerError,
+    MalformedProgramError,
+    ProgramNotFoundError,
+    DivisionByZeroError,
+)
+
 from .dependencies import setup_depedencies
 
 app = FastAPI()
@@ -27,3 +36,51 @@ def load_program_endpoint(program_req: LoadProgramRequest):
 def run_program_endpoint(program_id: ProgramId):
     result = run_program(program_id)
     return RunProgramResponse(program_id=program_id, result=result.result)
+
+
+@app.exception_handler(InvalidPulseSequenceError)
+async def invalid_pulse_sequence_exception_handler(
+    request: Request, ex: InvalidPulseSequenceError
+):
+    return JSONResponse(
+        status_code=452,
+        content={"message": f"{ex.name}"},
+    )
+
+
+@app.exception_handler(ValueNotAnIntegerError)
+async def value_not_an_integer_exception_handler(
+    request: Request, ex: ValueNotAnIntegerError
+):
+    return JSONResponse(
+        status_code=453,
+        content={"message": f"{ex.name}"},
+    )
+
+
+@app.exception_handler(MalformedProgramError)
+async def malformed_program_exception_handler(
+    request: Request, ex: MalformedProgramError
+):
+    return JSONResponse(
+        status_code=454,
+        content={"message": f"{ex.name}"},
+    )
+
+
+@app.exception_handler(ProgramNotFoundError)
+async def program_not_found_exception_handler(
+    request: Request, ex: ProgramNotFoundError
+):
+    return JSONResponse(
+        status_code=455,
+        content={"message": f"{ex.name}"},
+    )
+
+
+@app.exception_handler(DivisionByZeroError)
+async def division_by_zero_exception_handler(request: Request, ex: DivisionByZeroError):
+    return JSONResponse(
+        status_code=456,
+        content={"message": f"{ex.name}"},
+    )

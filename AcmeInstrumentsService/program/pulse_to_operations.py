@@ -6,6 +6,7 @@ from AcmeInstrumentsService.operation.operations import (
     Summation,
     SetInitialState,
 )
+from AcmeInstrumentsService.program.errors import InvalidPulseSequenceError
 
 _PULSES_TO_OPERATION = {
     (Pulse.AcmePulse1, Pulse.AcmePulse2): Summation,
@@ -20,7 +21,7 @@ def from_pulse_sequence_to_operation(pulses: List[Pulse], value: int):
     try:
         OperationType = _PULSES_TO_OPERATION[pulse_sequence_types]
     except KeyError:
-        raise ValueError(
+        raise InvalidPulseSequenceError(
             f"There's no existing operation for this pulse sequence: {pulse_sequence_types}"
         )
 
