@@ -27,10 +27,6 @@ class TestLoadProgram(unittest.TestCase):
         pulse_sequence = '{ "program_code": ["Acme_initial_state_pulse", 10, "Acme_pulse_1", "Acme_pulse_2", 120, "Acme_pulse_2", "Acme_pulse_1", "Acme_pulse_1", 3, "Acme_pulse_2", "Acme_pulse_2", 2] }'
         json_pulses = json.loads(pulse_sequence)
         response = self.client.post("/load_program", json=json_pulses)
-        import pdb
-
-        pdb.set_trace()
-
         assert response.status_code == 200
         assert "AcmeProgramId" in response.json()["program_id"]
 
