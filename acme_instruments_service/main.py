@@ -3,13 +3,13 @@ from typing import Optional
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
-from AcmeInstrumentsService.program.program_id import ProgramId
-from AcmeInstrumentsService.program.load.load_program import load_program
-from AcmeInstrumentsService.program.load.LoadProgramResponse import LoadProgramResponse
-from AcmeInstrumentsService.program.load.LoadProgramRequest import LoadProgramRequest
-from AcmeInstrumentsService.program.run.run_program import run_program
-from AcmeInstrumentsService.program.run.RunProgramResponse import RunProgramResponse
-from AcmeInstrumentsService.program.errors import (
+from acme_instruments_service.program.program_id import ProgramId
+from acme_instruments_service.program.load.load_program import load_program
+from acme_instruments_service.program.load.load_program_response import LoadProgramResponse
+from acme_instruments_service.program.load.load_program_request import LoadProgramRequest
+from acme_instruments_service.program.run.run_program import run_program
+from acme_instruments_service.program.run.run_program_response import RunProgramResponse
+from acme_instruments_service.program.errors import (
     InvalidPulseSequenceError,
     ValueNotAnIntegerError,
     MalformedProgramError,

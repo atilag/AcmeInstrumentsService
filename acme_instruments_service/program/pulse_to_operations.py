@@ -1,12 +1,12 @@
 from typing import List
-from AcmeInstrumentsService.pulse.pulse import Pulse
-from AcmeInstrumentsService.operation.operations import (
+from acme_instruments_service.pulse.pulse import Pulse
+from acme_instruments_service.operation.operations import (
     Multiplication,
     Division,
     Summation,
     SetInitialState,
 )
-from AcmeInstrumentsService.program.errors import InvalidPulseSequenceError
+from acme_instruments_service.program.errors import InvalidPulseSequenceError
 
 _PULSES_TO_OPERATION = {
     (Pulse.AcmePulse1, Pulse.AcmePulse2): Summation,

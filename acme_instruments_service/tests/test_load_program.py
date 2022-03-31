@@ -7,9 +7,9 @@ import unittest
 import pytest
 import json
 from fastapi.testclient import TestClient
-from AcmeInstrumentsService.program.load.load_program import load_program
-from AcmeInstrumentsService.program.run.run_program import run_program
-from AcmeInstrumentsService.main import app
+from acme_instruments_service.program.load.load_program import load_program
+from acme_instruments_service.program.run.run_program import run_program
+from acme_instruments_service.main import app
 
 
 class TestLoadProgram(unittest.TestCase):

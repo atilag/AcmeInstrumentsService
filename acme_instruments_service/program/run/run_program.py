@@ -1,8 +1,8 @@
 import operator
 import inject
-from AcmeInstrumentsService.program.program_operations import ProgramOperations
-from AcmeInstrumentsService.program.run.ProgramResult import ProgramResult
-from AcmeInstrumentsService.program.program_id import ProgramId
+from acme_instruments_service.program.program_operations import ProgramOperations
+from acme_instruments_service.program.run.program_result import ProgramResult
+from acme_instruments_service.program.program_id import ProgramId
 
 
 @inject.params(operations=ProgramOperations)
