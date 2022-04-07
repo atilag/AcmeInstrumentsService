@@ -1,16 +1,21 @@
-from typing import List, Dict
+"""Model for program operations."""
+
 from dataclasses import dataclass, field
+from typing import Dict, List
+
 from acme_instruments_service.operation.operations import Operation
+from acme_instruments_service.program.errors import (
+    DivisionByZeroError,
+    ProgramNotFoundError,
+)
 from acme_instruments_service.program.program_id import ProgramId
 from acme_instruments_service.program.run.program_result import ProgramResult
-from acme_instruments_service.program.errors import (
-    ProgramNotFoundError,
-    DivisionByZeroError,
-)
 
 
 @dataclass
 class ProgramOperations:
+    """Model for program operations."""
+
     operations: Dict[ProgramId, List[Operation]] = field(default_factory=dict)
     id: ProgramId = ""
     counter: int = 0
@@ -33,13 +38,13 @@ class ProgramOperations:
 
     def new(self) -> ProgramId:
         self.counter += 1
-        self.id = f"AcmeProgramId{self.counter}"
+        self.id = ProgramId(f"AcmeProgramId{self.counter}")
         self.operations[self.id] = []
         return self.id
 
     def add_operation(self, operation: Operation):
         if not isinstance(operation, Operation):
             raise TypeError(
-                f"Operation type not recoginized {operation.__class__.__name__}"
+                f"Operation type not recognized {operation.__class__.__name__}"
             )
         self.operations[self.id].append(operation)

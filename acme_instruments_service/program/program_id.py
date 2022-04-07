@@ -1,12 +1,15 @@
+"""Value object for a program ID."""
+
+
 class ProgramId(str):
-    """ValueObject representing a Program ID"""
+    """Value object for a program ID."""
 
     @classmethod
     def __get_validators__(cls):
-        """
-        Returns one or more validators
+        """Returns one or more validators.
+
         Yields:
-            One or more validator methods
+            One or more validator methods.
         """
         yield cls.validate
 

@@ -1,12 +1,15 @@
+"""Converter from pulses to operations."""
+
 from typing import List
-from acme_instruments_service.pulse.pulse import Pulse
+
 from acme_instruments_service.operation.operations import (
-    Multiplication,
     Division,
-    Summation,
+    Multiplication,
     SetInitialState,
+    Summation,
 )
 from acme_instruments_service.program.errors import InvalidPulseSequenceError
+from acme_instruments_service.pulse.pulse import Pulse
 
 _PULSES_TO_OPERATION = {
     (Pulse.AcmePulse1, Pulse.AcmePulse2): Summation,
@@ -17,14 +20,14 @@ _PULSES_TO_OPERATION = {
 
 
 def from_pulse_sequence_to_operation(pulses: List[Pulse], value: int):
+    """Convert a pulse sequence into operators."""
     pulse_sequence_types = tuple(pulses)
     try:
-        OperationType = _PULSES_TO_OPERATION[pulse_sequence_types]
+        operation_class = _PULSES_TO_OPERATION[pulse_sequence_types]
     except KeyError:
         raise InvalidPulseSequenceError(
             f"There's no existing operation for this pulse sequence: {pulse_sequence_types}"
         )
 
-    return OperationType(
-        value=value
-    )  # Create an instance of the operation with its corresponding value
+    # Create an instance of the operation with its corresponding value.
+    return operation_class(value=value)
