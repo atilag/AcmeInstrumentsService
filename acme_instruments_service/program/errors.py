@@ -1,3 +1,6 @@
+"""Errors related to programs."""
+
+
 class InvalidPulseSequenceError(Exception):
     def __init__(self, description: str):
         self.name = description

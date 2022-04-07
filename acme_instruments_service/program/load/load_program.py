@@ -1,30 +1,34 @@
-from typing import Union, List
+"""Use case for loading a program."""
+
+from typing import List, Union
+
 import inject
+
+from acme_instruments_service.program.errors import (
+    MalformedProgramError,
+    ValueNotAnIntegerError,
+)
 from acme_instruments_service.program.program_id import ProgramId
-from acme_instruments_service.pulse.pulse import Pulse
 from acme_instruments_service.program.program_operations import ProgramOperations
 from acme_instruments_service.program.pulse_to_operations import (
     from_pulse_sequence_to_operation,
 )
-from acme_instruments_service.program.errors import (
-    ValueNotAnIntegerError,
-    MalformedProgramError,
-)
+from acme_instruments_service.pulse.pulse import Pulse
 
 
 @inject.params(operations=ProgramOperations)
 def load_program(
     program_code: List[Union[Pulse, int]], operations: ProgramOperations
 ) -> ProgramId:
-    """Load the ACME pulse representation and translate it into a sequence of arithmetic operations"""
+    """Load the ACME pulse representation and translate it into a sequence of operations."""
     if len(program_code) == 0:
         raise MalformedProgramError("There are no pulse sequences in the program!")
 
-    id = operations.new()
+    id_ = operations.new()
     # We only run one program at a time, so we remove previous operations everytime a new
     # program arrives.
     pulse_block = []
-    # A block of pulses is defined by a sequence of pusles plus a value that ends the block
+    # A block of pulses is defined by a sequence of pulses plus a value that ends the block.
     for pulse_or_value in program_code:
         if isinstance(pulse_or_value, Pulse):
             pulse_block.append(pulse_or_value)
@@ -40,6 +44,8 @@ def load_program(
 
     if len(pulse_block) > 0:
         raise MalformedProgramError(
-            f"There are malformed pulse sequences in the program!: Malformed sequence: {pulse_block}"
+            "There are malformed pulse sequences in the program!: "
+            f"Malformed sequence: {pulse_block}"
         )
-    return id
+
+    return id_

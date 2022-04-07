@@ -1,4 +1,5 @@
-import types
+"""Operations used in AcmeInstruments programs."""
+
 import operator as builtin_operator
 from dataclasses import dataclass
 

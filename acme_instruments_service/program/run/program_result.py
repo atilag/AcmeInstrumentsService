@@ -1,3 +1,5 @@
+"""Model for a program result."""
+
 from pydantic import BaseModel, Field
 
 
