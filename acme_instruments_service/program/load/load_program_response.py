@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from AcmeInstrumentsService.program.program_id import ProgramId
+from acme_instruments_service.program.program_id import ProgramId
 
 class LoadProgramResponse(BaseModel):
     program_id: ProgramId = Field(

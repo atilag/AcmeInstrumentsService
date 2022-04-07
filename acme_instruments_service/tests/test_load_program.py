@@ -7,9 +7,9 @@ import unittest
 import pytest
 import json
 from fastapi.testclient import TestClient
-from AcmeInstrumentsService.program.load.load_program import load_program
-from AcmeInstrumentsService.program.run.run_program import run_program
-from AcmeInstrumentsService.main import app
+from acme_instruments_service.program.load.load_program import load_program
+from acme_instruments_service.program.run.run_program import run_program
+from acme_instruments_service.main import app
 
 
 class TestLoadProgram(unittest.TestCase):
@@ -27,10 +27,6 @@ class TestLoadProgram(unittest.TestCase):
         pulse_sequence = '{ "program_code": ["Acme_initial_state_pulse", 10, "Acme_pulse_1", "Acme_pulse_2", 120, "Acme_pulse_2", "Acme_pulse_1", "Acme_pulse_1", 3, "Acme_pulse_2", "Acme_pulse_2", 2] }'
         json_pulses = json.loads(pulse_sequence)
         response = self.client.post("/load_program", json=json_pulses)
-        import pdb
-
-        pdb.set_trace()
-
         assert response.status_code == 200
         assert "AcmeProgramId" in response.json()["program_id"]
 

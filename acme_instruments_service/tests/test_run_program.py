@@ -7,7 +7,7 @@ import unittest
 import pytest
 import json
 from fastapi.testclient import TestClient
-from AcmeInstrumentsService.main import app
+from acme_instruments_service.main import app
 
 
 class TestRunProgram(unittest.TestCase):
@@ -22,7 +22,6 @@ class TestRunProgram(unittest.TestCase):
         self.client = TestClient(app)
 
     def test_run_program_returns_195(self):
-
         # We first load the program
         pulse_sequence = '{ "program_code": ["Acme_initial_state_pulse", 10, "Acme_pulse_1", "Acme_pulse_2", 120, "Acme_pulse_2", "Acme_pulse_1", "Acme_pulse_1", 3, "Acme_pulse_2", "Acme_pulse_2", 2] }'
         json_pulses = json.loads(pulse_sequence)

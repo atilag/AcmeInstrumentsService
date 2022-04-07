@@ -59,5 +59,21 @@ When we call the /load_program endpoint with the corresponding request body and 
 This "Program ID" needs to be used in a later call to the /run_program endpoint so the service identifies the program to run.
 
 This implies two REST calls:
+```
 POST /load_program {...}
 GET /run_program/<program_id>
+```
+
+Executing the application
+=========================
+
+```
+uvicorn acme_instruments_service.main:app
+```
+
+Running the tests
+=================
+
+```
+pytest
+```

@@ -1,12 +1,12 @@
 from typing import Union, List
 import inject
-from AcmeInstrumentsService.program.program_id import ProgramId
-from AcmeInstrumentsService.pulse.pulse import Pulse
-from AcmeInstrumentsService.program.program_operations import ProgramOperations
-from AcmeInstrumentsService.program.pulse_to_operations import (
+from acme_instruments_service.program.program_id import ProgramId
+from acme_instruments_service.pulse.pulse import Pulse
+from acme_instruments_service.program.program_operations import ProgramOperations
+from acme_instruments_service.program.pulse_to_operations import (
     from_pulse_sequence_to_operation,
 )
-from AcmeInstrumentsService.program.errors import (
+from acme_instruments_service.program.errors import (
     ValueNotAnIntegerError,
     MalformedProgramError,
 )

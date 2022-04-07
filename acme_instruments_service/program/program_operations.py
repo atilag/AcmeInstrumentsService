@@ -1,9 +1,9 @@
 from typing import List, Dict
 from dataclasses import dataclass, field
-from AcmeInstrumentsService.operation.operations import Operation
-from AcmeInstrumentsService.program.program_id import ProgramId
-from AcmeInstrumentsService.program.run.ProgramResult import ProgramResult
-from AcmeInstrumentsService.program.errors import (
+from acme_instruments_service.operation.operations import Operation
+from acme_instruments_service.program.program_id import ProgramId
+from acme_instruments_service.program.run.program_result import ProgramResult
+from acme_instruments_service.program.errors import (
     ProgramNotFoundError,
     DivisionByZeroError,
 )

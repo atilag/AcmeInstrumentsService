@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field
 from typing import List, Union
-from AcmeInstrumentsService.pulse.pulse import Pulse
+from acme_instruments_service.pulse.pulse import Pulse
 
 
 class LoadProgramRequest(BaseModel):
